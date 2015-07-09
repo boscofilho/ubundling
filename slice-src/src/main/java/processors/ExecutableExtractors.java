@@ -1,6 +1,7 @@
 package processors;
 
-import org.kevoree.log.Log;
+//import org.kevoree.log.Log;
+import org.apache.log4j.Logger;
 import spoon.reflect.declaration.CtConstructor;
 import spoon.reflect.declaration.CtExecutable;
 import spoon.reflect.declaration.CtParameter;
@@ -15,6 +16,8 @@ import java.util.ArrayList;
  * Created by marodrig on 05/03/2015.
  */
 public class ExecutableExtractors extends ExtractorProcessor<CtExecutable> {
+
+    final static Logger logger = Logger.getLogger(ExecutableExtractors.class);
 
     /**
      * Empty constructor to override strange default behavior
@@ -36,7 +39,7 @@ public class ExecutableExtractors extends ExtractorProcessor<CtExecutable> {
                 CtTypeReference s = ex.getType();
                 if (!result.contains(s)) result.add(s);
             } catch (NullPointerException ex) {
-                Log.error("Unable to find type of: " + ex.toString());
+                logger.error("Unable to find type of: " + ex.toString());
             }
         }
         try {
@@ -47,7 +50,7 @@ public class ExecutableExtractors extends ExtractorProcessor<CtExecutable> {
             }
             return result;
         } catch (NullPointerException ex) {
-            Log.error(ex.toString());
+            logger.error(ex.toString());
             throw ex;
         }
     }

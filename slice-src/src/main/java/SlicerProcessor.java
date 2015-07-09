@@ -3,7 +3,7 @@ import extractors.SourceDependencyExtractor;
 import processors.ExtractorProcessor;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
-import org.kevoree.log.Log;
+//import org.kevoree.log.Log;
 import processors.*;
 import spoon.processing.Processor;
 import spoon.reflect.declaration.*;
@@ -116,7 +116,7 @@ public class SlicerProcessor extends QueueProcessingManager {
         try {
             return getFactory().CompilationUnit().getMap().get(s).getMainType();
         } catch (NullPointerException ex) {
-            Log.error("Unable to find class " + s);
+            logger.error("Unable to find class " + s);
             return null;
         }
     }
@@ -206,11 +206,14 @@ public class SlicerProcessor extends QueueProcessingManager {
     public void unbundle(List<String> classes) {
         File source = new File(projectPath);
         File dest = new File(unbundledPath);
+
+        logger.info("Copy results to output directory... please by patient");
         try {
             FileUtils.copyDirectory(source, dest);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        logger.info("Copy results to output directory. Done");
 
         final Path start = Paths.get(unbundledPath + srcPath);
         try {

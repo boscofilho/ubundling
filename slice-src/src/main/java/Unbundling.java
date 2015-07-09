@@ -40,6 +40,7 @@ public class Unbundling {
         d.setPackageName("com.google");
 
         d.getInputClasses().add("com.google.common.collect.BiMap");
+        /*
         d.getInputClasses().add("com.google.common.collect.Iterables");
         d.getInputClasses().add("com.google.common.collect.HashBiMap");
         d.getInputClasses().add("com.google.common.collect.ReferenceMap");
@@ -50,7 +51,7 @@ public class Unbundling {
         d.getInputClasses().add("com.google.common.collect.ImmutableList");
         d.getInputClasses().add("com.google.common.collect.PrimitiveArrays");
         d.getInputClasses().add("com.google.common.collect.ForwardingList");
-
+        */
 
 //        d.getInputClasses().add("com.google.common.collect.ImmutableMap");
 /*
@@ -89,7 +90,7 @@ public class Unbundling {
         MavenBuilder rb = new MavenBuilder(up + "\\guava", up + "\\guava" + s);
         rb.setPhase(new String[]{"clean", "compile"});
         rb.setTimeOut(0);
-//        rb.initPom(getOutputDir() + "/pom.xml");
+        //rb.initPom(getOutputDir() + "/pom.xml");
         rb.runBuilder();
 
         System.out.println("----------------------------------");
