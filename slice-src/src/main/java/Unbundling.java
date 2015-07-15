@@ -1,4 +1,5 @@
 import fr.inria.diversify.buildSystem.maven.MavenBuilder;
+import fr.inria.diversify.buildSystem.maven.MavenDependencyResolver;
 import spoon.reflect.factory.Factory;
 
 import java.io.IOException;
@@ -12,11 +13,15 @@ public class Unbundling {
      * entry of the un-bundling program
      * @param args
      */
-    public static void main(String[] args) throws IllegalAccessException, InstantiationException, ClassNotFoundException, IOException, InterruptedException {
+    public static void main(String[] args) throws Exception {
         String s =  "\\guava\\src";
         String tpath = "\\guava-testlib";
         String pp = "C:\\MarcelStuff\\DATA\\DIVERSE\\input_programs\\guava-master";
         String up = "C:\\MarcelStuff\\DATA\\DIVERSE\\output_programs\\guava-master";
+
+        MavenDependencyResolver r = new MavenDependencyResolver();
+        r.DependencyResolver(pp + "/pom.xml");
+
         Factory f = new SpoonMetaFactory().buildNewFactory(pp + s, 7);
 
 
@@ -87,7 +92,7 @@ public class Unbundling {
         System.out.println("----------------------------------");
         System.out.println("COMPILING BUNDLE... ");
 
-        MavenBuilder rb = new MavenBuilder(up + "\\guava", up + "\\guava" + s);
+        MavenBuilder rb = new MavenBuilder(up + "\\guava", up  + s);
         rb.setPhase(new String[]{"clean", "compile"});
         rb.setTimeOut(0);
         //rb.initPom(getOutputDir() + "/pom.xml");
